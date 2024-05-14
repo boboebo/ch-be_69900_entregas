@@ -1,0 +1,14 @@
+{
+  "name": "ch-be_69900_entregas",
+  "version": "1.0.0",
+  "description": "Este repo es para presentar las entregas en el curso de Backend, cursado en la comision 69900",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
