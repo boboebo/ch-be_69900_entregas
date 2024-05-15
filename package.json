@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.19.2",
     "nodemon": "^3.1.0",
+    "uui": "^1.0.7",
     "uuid": "^9.0.1"
   }
 }

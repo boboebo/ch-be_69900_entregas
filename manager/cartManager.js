@@ -9,7 +9,7 @@ export default class CartManager {
   getCarts = async () => {
     try {
       if (fs.existsSync(this.path)) {
-        const carts = await fs.readFileSync(this.path, "utf8");
+        const carts = await fs.promises.readFile(this.path, "utf8");
         return JSON.parse(carts);
       } else return [];
     } catch (error) {
@@ -25,7 +25,7 @@ export default class CartManager {
       };
       const carts = await this.getCarts();
       carts.push(cart);
-      await fs.writeFileSync(this.path, JSON.stringify(carts));
+      await fs.promises.writeFile(this.path, JSON.stringify(carts));
       return cart;
     } catch (error) {
       console.log(error);
@@ -63,7 +63,7 @@ export default class CartManager {
       const cartIndex = carts.findIndex(cart => cart.id.toString() === cid.toString());
       carts[cartIndex] = cartById;
       const jsonCarts = JSON.stringify(carts);
-      fs.writeFileSync(this.path, jsonCarts);
+      fs.promises.writeFile(this.path, jsonCarts);
 
       return cartById;
     } catch (error) {

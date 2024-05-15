@@ -6,15 +6,14 @@ export default class ProductManager {
     this.path = path;
   }
 
-  getProducts = (limit) => {
+  getProducts = async (limit) => {
     try {
-      console.log(limit);
       if (fs.existsSync(this.path)) {
-        const products = fs.readFileSync(this.path, "utf8");
+        const products = await fs.promises.readFile(this.path, "utf8");
         let productObj = [];
-        if(limit){
+        if (limit) {
           productObj = JSON.parse(products).splice(0, limit);
-        }else{
+        } else {
           productObj = JSON.parse(products);
         }
         return productObj;
@@ -24,10 +23,10 @@ export default class ProductManager {
     }
   };
 
-  getProductById = (pid) => {
+  getProductById = async (pid) => {
     try {
       if (fs.existsSync(this.path)) {
-        const products = this.getProducts();
+        const products = await this.getProducts();
         const product = products.find((prod) => prod.id == pid);
         return product;
       } else return ["notfound"];
@@ -36,20 +35,20 @@ export default class ProductManager {
     }
   };
 
-  createProduct = (prod) => {
+  createProduct = async (prod) => {
     const product = {
       id: v4(),
       status: true,
       ...prod,
     };
-    const products = this.getProducts();
+    const products = await this.getProducts();
     products.push(product);
-    fs.writeFileSync(this.path, JSON.stringify(products));
+    await fs.promises.writeFile(this.path, JSON.stringify(products));
   };
 
-  updateProduct = (pid, prod) => {
+  updateProduct = async (pid, prod) => {
     //get prodById
-    const prodById = this.getProductById(pid);
+    const prodById = await this.getProductById(pid);
 
     //UpdatedProd = update prodById with prod
     prodById.title = prod.title;
@@ -60,27 +59,23 @@ export default class ProductManager {
     prodById.category = prod.category;
     prodById.thumbnails = prod.thumbnails;
 
-    const products = this.getProducts();
-    const index = products.findIndex(item => item.id.toString() === pid);
+    const products = await this.getProducts();
+    const index = products.findIndex((item) => item.id.toString() === pid);
     products[index] = prodById;
-    
+
     //update json
     const jsonProducts = JSON.stringify(products, null, 2);
-    fs.writeFileSync(this.path, jsonProducts);
+    await fs.promises.writeFile(this.path, jsonProducts);
 
     return prodById;
   };
 
-  deleteProductById = (pid)=>{
-    const prodById = this.getProductById(pid);
-    const products = this.getProducts();
-    const index = products.findIndex(item => item.id.toString() === pid);
+  deleteProductById = async (pid) => {
+    const prodById = await this.getProductById(pid);
+    const products = await this.getProducts();
+    const index = products.findIndex((item) => item.id.toString() === pid);
     products.splice(index, 1);
     const jsonProducts = JSON.stringify(products, null, 2);
-    fs.writeFileSync(this.path, jsonProducts);
-
-
-  }
-
-
+    await fs.promises.writeFile(this.path, jsonProducts);
+  };
 }

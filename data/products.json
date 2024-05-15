@@ -1,16 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "Product 1",
-    "description": "description prod 1",
-    "code": "111",
-    "price": 101,
-    "status": true,
-    "stock": 100,
-    "category": "catProd1",
-    "thumbnails": "thumbnails prod1"
-  },
-  {
     "id": "b0a72d53-85e6-4712-a269-2d263d096eef",
     "status": true,
     "title": "Product 2",
