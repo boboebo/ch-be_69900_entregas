@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductManager from "../manager/productManager.js";
+import { validateProd } from "../middleware/validateProd.js";
 
 const router = Router();
 const path = "data/products.json";
@@ -16,7 +17,7 @@ router.get("/", async (req, res) => {
 // get producto by id
 router.get("/:pid", async (req, res) => {
   const { pid } = req.params;
-  const product = await pm.getProductById(pid)
+  const product = await pm.getProductById(pid);
   res.status(200).json(product);
 });
 
@@ -31,24 +32,24 @@ router.get("/:pid", async (req, res) => {
   stock number
   thumbnails: optional
 */
-router.post("/", async(req, res)=>{
+router.post("/", validateProd, async (req, res) => {
   const product = req.body;
   const productCreated = pm.createProduct(product);
   res.json(productCreated);
-})
+});
 
 // put update product by id
-router.put("/:pid", async (req, res)=>{
+router.put("/:pid", async (req, res) => {
   const { pid } = req.params;
   const prodUpd = await pm.updateProduct(pid, req.body);
   if (!prodUpd) res.status(404).json({ msg: "Error updating prod" });
-      res.status(200).json(prodUpd);  
-})
+  res.status(200).json(prodUpd);
+});
 
 //delete product by id
 router.delete("/:pid", async (req, res) => {
   const { pid } = req.params;
-  const product = await pm.deleteProductById(pid)
+  const product = await pm.deleteProductById(pid);
   res.status(200).json(product);
 });
 
