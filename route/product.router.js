@@ -8,7 +8,8 @@ const pm = new ProductManager(path);
 
 // get de productos
 router.get("/", async (req, res) => {
-  const products = await pm.getProducts();
+  const { limit } = req.query;
+  const products = await pm.getProducts(limit);
   res.status(200).json(products);
 });
 

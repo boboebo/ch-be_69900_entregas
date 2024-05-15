@@ -6,11 +6,18 @@ export default class ProductManager {
     this.path = path;
   }
 
-  getProducts = () => {
+  getProducts = (limit) => {
     try {
+      console.log(limit);
       if (fs.existsSync(this.path)) {
         const products = fs.readFileSync(this.path, "utf8");
-        return JSON.parse(products);
+        let productObj = [];
+        if(limit){
+          productObj = JSON.parse(products).splice(0, limit);
+        }else{
+          productObj = JSON.parse(products);
+        }
+        return productObj;
       } else return ["notfound"];
     } catch (error) {
       console.log(error);
