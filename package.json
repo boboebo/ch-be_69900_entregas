@@ -5,7 +5,8 @@
   "main": "./server.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +17,6 @@
     "socket.io": "^4.7.5",
     "uui": "^1.0.7",
     "uuid": "^9.0.1"
-  }
+  },
+  "devDependencies": {}
 }

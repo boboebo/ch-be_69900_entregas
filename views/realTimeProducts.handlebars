@@ -1,0 +1,28 @@
+<h1>RealTime Products</h1>
+<form id="formProductos">
+    <label for="idProd">codigo  </label><input name="idProd" type="text" id="idProd">
+    <label for="nameProd">descripcion  </label><input name="nameProd" type="text" id="nameProd">
+    <label for="precioProd">precio  </label><input name="precioProd" type="text" id="precioProd"><br><br>
+    <label for="categoriaProd">categoria  </label><input name="categoriaProd" type="text" id="categoriaProd">
+    <label for="stockProd">stock  </label><input name="stockProd" type="text" id="stockProd">
+    <input type="submit" value="Agregar">
+</form>
+
+<div id="productsList">
+  <table id="productsTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Operaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/realTimeProducts.js"></script>
