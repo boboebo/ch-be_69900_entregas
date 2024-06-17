@@ -44,6 +44,7 @@ export default class ProductManager {
     const products = await this.getProducts();
     products.push(product);
     await fs.promises.writeFile(this.path, JSON.stringify(products));
+    return product;
   };
 
   updateProduct = async (pid, prod) => {
@@ -51,13 +52,13 @@ export default class ProductManager {
     const prodById = await this.getProductById(pid);
 
     //UpdatedProd = update prodById with prod
-    prodById.title = prod.title;
-    prodById.description = prod.description;
-    prodById.code = prod.code;
-    prodById.price = prod.price;
-    prodById.stock = prod.stock;
-    prodById.category = prod.category;
-    prodById.thumbnails = prod.thumbnails;
+    prodById.title = prod.title ? prod.title : prodById.title;
+    prodById.description = prod.description ? prod.description : prodById.description;
+    prodById.code = prod.code ? prod.code : prodById.code;
+    prodById.price = prod.price ? prod.price : prodById.price;
+    prodById.stock = prod.stock ? prod.stock : prodById.stock;
+    prodById.category = prod.category ? prod.category : prodById.category;
+    prodById.thumbnails = prod.thumbnails ? prod.thumbnails : prodById.thumbnails;
 
     const products = await this.getProducts();
     const index = products.findIndex((item) => item.id.toString() === pid);

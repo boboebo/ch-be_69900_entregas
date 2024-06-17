@@ -34,7 +34,7 @@ router.get("/:pid", async (req, res) => {
 */
 router.post("/", validateProd, async (req, res) => {
   const product = req.body;
-  const productCreated = pm.createProduct(product);
+  const productCreated = await pm.createProduct(product);
   res.json(productCreated);
 });
 
