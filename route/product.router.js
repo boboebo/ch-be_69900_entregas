@@ -24,7 +24,8 @@ const createProductsRouter = (io) => {
   // post add producto
   router.post("/", validateProd, async (req, res) => {
     const product = req.body;
-    const productCreated = await pm.createProduct(product);
+    console.log("product en post -> ", product);
+    const productCreated = pm.createProduct(product);
     io.emit('productCreated', productCreated);
     res.json(productCreated);
   });
