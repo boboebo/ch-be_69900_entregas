@@ -92,14 +92,14 @@ export const removeProdFromCart = async (cartId, prodId) => {
 };
 
 /// update prod cant
-export const updProdQtyFromCart = async (cartId, prodId) => {
+export const updProdQtyFromCart = async (cartId, prodId, quantity) => {
   try {
     const existCart = await getById(cartId);
     if (!existCart) return null;
     const existProdInCart = await cartDao.existProdInCart(cartId, prodId);
     if (!existProdInCart) return null;
 
-    const cart = await cartDao.updProdQtyFromCart(cartId, prodId);
+    const cart = await cartDao.updProdQtyFromCart(cartId, prodId, quantity);
     return cart;
   } catch (error) {
     console.log("error: ", error.message);

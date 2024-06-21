@@ -103,8 +103,8 @@ export default class CartDaoMongoDB {
   async updProdQtyFromCart(cartId, prodId, quantity) {
     try {
       return await CartModel.findOneAndUpdate(
-        { _id: cartId, 'products.product': prodId },
-        { $set: { 'products.$.quantity': quantity } },
+        { _id: cartId, 'products.prod': prodId },
+        { $set: { 'products.$.qty': quantity } },
         { new: true }
       );
     } catch (error) {
@@ -115,6 +115,7 @@ export default class CartDaoMongoDB {
   /// limpiar cart
   async cleanCart(cartId) {
     try {
+        console.log("cartId",cartId);
      return await CartModel.findOneAndUpdate(
       { _id: cartId },
       { $set: { products: [] } },
