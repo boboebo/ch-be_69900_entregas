@@ -1,4 +1,3 @@
-// service/product.service.js
 import ProductDaoMongoDB from "../dao/product.dao.js";
 const prodDao = new ProductDaoMongoDB();
 
