@@ -8,9 +8,9 @@ router.get("/:id", controller.getById);
 router.post("/", controller.create);
 router.put("/:id", controller.update);
 router.delete("/:id", controller.remove);
-router.post("/:idCart/products/:idProd", controller.addProdToCart);
-router.delete("/:idCart/products/:idProd", controller.removeProdFromCart);
-router.put("/:idCart/products/:idProd", controller.updProdQtyFromCart);
-router.delete("/clear/:idCart", controller.cleanCart);
+router.post("/:cartId/products/:prodId", controller.addProdToCart);
+router.delete("/:cartId/products/:prodId", controller.removeProdFromCart);
+router.put("/:cartId/products/:prodId", controller.updProdQtyFromCart);
+router.delete("/clear/:cartId", controller.cleanCart);
 
 export default router;

@@ -51,6 +51,17 @@ export default class CartDaoMongoDB {
     }
   }
 
+  async existProdInCart(cartId, prodId){
+    try {
+      return await CartModel.findOne({
+        _id: cartId,
+        products: { $elemMatch: { product: prodId } }
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   /// add prod
   async addProdToCart(cartId, prodId) {
     try {

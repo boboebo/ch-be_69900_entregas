@@ -18,6 +18,7 @@ export const getAll = async (req, res, next) => {
 export const getById = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(id);
     const cart = await service.getById(id);
     if (!cart) {
       res.status(404).json({ message: "could not get cart" });
@@ -76,8 +77,8 @@ export const remove = async (req, res) => {
 /// add prod
 export const addProdToCart = async (req, res) => {
   try {
-    const { idCart, idProd } = req.params;
-    const cart = await service.addProdToCart(idCart, idProd);
+    const { cartId, prodId } = req.params;
+    const cart = await service.addProdToCart(cartId, prodId);
     if (!cart) {
       res.status(404).json({ message: "could not add product to cart" });
     } else {
@@ -91,8 +92,8 @@ export const addProdToCart = async (req, res) => {
 /// remove prod
 export const removeProdFromCart = async (req, res) => {
   try {
-    const { idCart, idProd } = req.params;
-    const cart = await service.removeProdFromCart(idCart, idProd);
+    const { cartId, prodId } = req.params;
+    const cart = await service.removeProdFromCart(cartId, prodId);
     if (!cart) {
       res.status(404).json({ message: "could not remove product to cart" });
     } else {
@@ -106,9 +107,9 @@ export const removeProdFromCart = async (req, res) => {
 /// update prod cant
 export const updProdQtyFromCart = async (req, res) => {
   try {
-    const { idCart, idProd } = req.params;
+    const { cartId, prodId } = req.params;
     const { quantity } = req.body;
-    const cart = await service.updProdQtyFromCart(idCart, idProd, quantity);
+    const cart = await service.updProdQtyFromCart(cartId, prodId, quantity);
     if (!cart) {
       res
         .status(404)
@@ -124,8 +125,8 @@ export const updProdQtyFromCart = async (req, res) => {
 /// clean cart
 export const cleanCart = async (req, res) => {
   try {
-    const { idCart } = req.params;
-    const cart = await service.cleanCart(idCart);
+    const { cartId } = req.params;
+    const cart = await service.cleanCart(cartId);
     if (!cart) {
       res.status(404).json({ message: "could not clean the cart" });
     } else {

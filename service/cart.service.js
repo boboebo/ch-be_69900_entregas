@@ -34,9 +34,9 @@ export const create = async (cartObj) => {
 };
 
 /// update
-export const update = async (idCart, cartObj) => {
+export const update = async (cartId, cartObj) => {
   try {
-    const cart = await cartDao.getById(idCart, cartObj);
+    const cart = await cartDao.getById(cartId, cartObj);
     return cart;
   } catch (error) {
     console.log("error: ", error.message);
@@ -44,9 +44,9 @@ export const update = async (idCart, cartObj) => {
 };
 
 ///remove
-export const remove = async (idCart) => {
+export const remove = async (cartId) => {
   try {
-    const cart = await cartDao.remove(idCart);
+    const cart = await cartDao.remove(cartId);
     return cart;
   } catch (error) {
     console.log("error: ", error.message);
@@ -54,7 +54,7 @@ export const remove = async (idCart) => {
 };
 
 /// add prod
-export const addProdToCart = async (idCart, idProd) => {
+export const addProdToCart = async (cartId, prodId) => {
   try {
     const existCart = await getById(cartId);
     if (!existCart) return null;
@@ -62,7 +62,7 @@ export const addProdToCart = async (idCart, idProd) => {
     const existProd = await prodDao.getById(prodId);
     if (!existProd) return null;
 
-    const cart = await cartDao.addProdToCart(idCart, idProd);
+    const cart = await cartDao.addProdToCart(cartId, prodId);
     return cart;
   } catch (error) {
     console.log("error: ", error.message);
@@ -70,14 +70,14 @@ export const addProdToCart = async (idCart, idProd) => {
 };
 
 /// remove prod
-export const removeProdFromCart = async (idCart, idProd) => {
+export const removeProdFromCart = async (cartId, prodId) => {
   try {
     const existCart = await getById(cartId);
     if (!existCart) return null;
     const existProdInCart = await cartDao.existProdInCart(cartId, prodId);
     if (!existProdInCart) return null;
 
-    const cart = await cartDao.removeProdFromCart(idCart, idProd);
+    const cart = await cartDao.removeProdFromCart(cartId, prodId);
     return cart;
   } catch (error) {
     console.log("error: ", error.message);
@@ -85,14 +85,14 @@ export const removeProdFromCart = async (idCart, idProd) => {
 };
 
 /// update prod cant
-export const updProdQtyFromCart = async (idCart, idProd) => {
+export const updProdQtyFromCart = async (cartId, prodId) => {
   try {
     const existCart = await getById(cartId);
     if (!existCart) return null;
     const existProdInCart = await cartDao.existProdInCart(cartId, prodId);
     if (!existProdInCart) return null;
 
-    const cart = await cartDao.updProdQtyFromCart(idCart, idProd);
+    const cart = await cartDao.updProdQtyFromCart(cartId, prodId);
     return cart;
   } catch (error) {
     console.log("error: ", error.message);
@@ -100,12 +100,12 @@ export const updProdQtyFromCart = async (idCart, idProd) => {
 };
 
 /// limpiar cart
-export const cleanCart = async (idCart, idProd) => {
+export const cleanCart = async (cartId, prodId) => {
     try {
       const existCart = await getById(cartId);
       if (!existCart) return null;
   
-      const cart = await cartDao.cleanCart(idCart, idProd);
+      const cart = await cartDao.cleanCart(cartId, prodId);
       return cart;
     } catch (error) {
       console.log("error: ", error.message);
