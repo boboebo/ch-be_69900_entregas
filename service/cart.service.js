@@ -26,7 +26,7 @@ export const getById = async (id) => {
 /// create
 export const create = async (cartObj) => {
   try {
-    const cart = await cartDao.getById(cartObj);
+    const cart = await cartDao.create(cartObj);
     return cart;
   } catch (error) {
     console.log("error: ", error.message);

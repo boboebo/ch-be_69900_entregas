@@ -1,4 +1,3 @@
-// controller/product.controller.js
 import * as service from "../service/product.service.js";
 
 export const getAll = async (req, res) => {
