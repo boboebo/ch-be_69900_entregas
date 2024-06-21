@@ -68,14 +68,14 @@ export default class CartDaoMongoDB {
       const existProdInCart = await this.existProdInCart(cartId, prodId);
         if(existProdInCart){
           return await CartModel.findOneAndUpdate(
-            { _id: cartId, 'products.product': prodId },
+            { _id: cartId, 'products.prod': prodId },
             { $set: { 'products.$.quantity': existProdInCart.products[0].quantity + 1 } },
             { new: true }
           );
         } else {
           return await CartModel.findByIdAndUpdate(
             cartId,
-            { $push: { products: { product: prodId } } },
+            { $push: { products: { prod: prodId } } },
             { new: true }
           )
         }
