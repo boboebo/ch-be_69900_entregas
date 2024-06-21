@@ -1,13 +1,15 @@
 import express from 'express';
-import cartRouter from './route/cart.router.js'
-import productsRouter from './route/product.router.js';
+import productRouter from './route/product.router.js';
+import { dbConnect } from './db/db.js';
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/cart', cartRouter);
-app.use('/api/product', productsRouter);
+app.use('/product', productRouter);
 
-app.listen(8080,()=>{
-    console.log(`Escuchando en el puerto 8080`)
-})
+dbConnect();
+
+app.listen(8080, () => {
+  console.log(`Escuchando en el puerto 8080`);
+});
