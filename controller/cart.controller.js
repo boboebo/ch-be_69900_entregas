@@ -59,8 +59,36 @@ export const update = async (req, res) => {
 };
 
 ///remove
+export const remove = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const cart = await service.remove(id);
+      if (!cart) {
+        res.status(404).json({ message: "could not remove cart" });
+      } else {
+        res.status(200).json(cart);
+      }
+    } catch (error) {
+      next(error.message);
+    }
+  };
+  
 
 /// add prod
+export const addProdToCart = async (req, res) => {
+    try {
+      const { idCart, idProd } = req.params;
+      const cart = await service.update(id, req.body);
+      if (!cart) {
+        res.status(404).json({ message: "could not update cart" });
+      } else {
+        res.status(200).json(cart);
+      }
+    } catch (error) {
+      next(error.message);
+    }
+  };
+  
 
 /// remove prod
 

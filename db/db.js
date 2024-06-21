@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-// const cs = "mongodb://localhost:27017/coder"; 
-const cs = 'mongodb+srv://agustinneuman:admin@cluster0.rx7dccp.mongodb.net/CoderHoFinal?retryWrites=true&w=majority&appName=Cluster0';
+dotenv.config(); 
+
+const cs = process.env.MONGODB_CONNECTION_STRING;;
 
 export const dbConnect = async () => {
   try {
