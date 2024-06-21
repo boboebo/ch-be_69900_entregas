@@ -89,7 +89,7 @@ export default class CartDaoMongoDB {
     try {
       return await CartModel.findByIdAndUpdate(
         { _id: cartId },
-        { $pull: { products: { product: prodId } } },
+        { $pull: { products: { prod: prodId } } },
         { new: true }
       )
     } catch (error) {
