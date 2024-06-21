@@ -55,7 +55,7 @@ export default class CartDaoMongoDB {
     try {
       return await CartModel.findOne({
         _id: cartId,
-        products: { $elemMatch: { product: prodId } }
+        products: { $elemMatch: { prod: prodId } }
       });
     } catch (error) {
       throw new Error(error);
@@ -85,8 +85,10 @@ export default class CartDaoMongoDB {
   }
 
   /// remove prod
-  async removeProdToCart(cartId, prodId) {
+  async removeProdFromCart(cartId, prodId) {
     try {
+        console.log("cartId ", cartId);
+        console.log("prodId ",prodId);
       return await CartModel.findByIdAndUpdate(
         { _id: cartId },
         { $pull: { products: { prod: prodId } } },
